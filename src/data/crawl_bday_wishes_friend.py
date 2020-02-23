@@ -17,7 +17,7 @@ def main():
 
     doc = BeautifulSoup(r.text, "html.parser")
 
-    raw_wishes = []
+    raw_wishes = ["text"]
     for record in doc.find_all("p"):
         if re.match("\d+\.\s", record.text) is not None:
             temp_1 = re.sub(r"\d+\.", "", record.text)
@@ -29,9 +29,6 @@ def main():
         for record in raw_wishes:
             print(record)
             csv_writer.writerow([record])
-            # fix it
-            # escape quotation marks
-            # why is it get written into 3 columns instead of 1
 
 
 if __name__ == '__main__':

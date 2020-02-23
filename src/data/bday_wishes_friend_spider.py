@@ -13,6 +13,8 @@ class BdayWishesFriendSpider(scrapy.Spider):
             print(record.get())
             raw_wishes.append(record.get())
 
+        raw_wishes = raw_wishes[:-23]
+
         filename = "../../data/raw/bday_wishes_for_friend_2.csv"
         with open(filename, "w", newline="") as file:
             csv_writer = csv.writer(file, delimiter=";")

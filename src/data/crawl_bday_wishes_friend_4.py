@@ -21,9 +21,13 @@ def main():
     for record in doc.select("div.entry-content p"):
         if re.match("\d+\.\s", record.text) is not None:
             temp_1 = re.sub(r"\d+\.", "", record.text).strip()
-            raw_wishes.append(temp_1)
+            if re.match("\s\–.*", temp_1) is not None:
+                temp_2 = re.sub(r"\s\–\s.*", "", temp_1)
+            else:
+                temp_2 = temp_1
+            raw_wishes.append(temp_2)
 
-    with open("../../data/raw/bday_wishes_for_friend_5.csv", "w", newline="") as file:
+    with open("../../data/raw/bday_wishes_for_friend_5_corrected.csv", "w", newline="") as file:
         csv_writer = csv.writer(file, delimiter=";")
         for record in raw_wishes:
             print(record)
